@@ -90,8 +90,8 @@
                                 @endif
                             @endforeach
                             <td class="w-40 text-center">
-                                <div class="flex items-center justify-center {{ $dt->sv ? 'text-success' : 'text-danger' }}">
-                                    <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> {{ $dt->sv ? 'Terverifikasi' : 'Menunggu Verifikasi' }}
+                                <div class="flex items-center justify-center {{ $dt->sv == 1 ? 'text-success' : 'text-danger' }}">
+                                    <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> {{ $dt->sv==1 ? 'Terverifikasi' : ($dt->sv==2 ? 'T' : 'Y') }}
                                 </div>
                             </td>
                         </tr>
