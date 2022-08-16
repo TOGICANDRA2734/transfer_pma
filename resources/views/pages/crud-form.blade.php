@@ -50,14 +50,19 @@
     </div>
     
     <div class="grid grid-cols-12 gap-6 mt-20">
-        <!-- <div class="intro-y col-span-12 flex justify-end flex-wrap sm:flex-nowrap items-center mt-2">
-            <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+        <form class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
+            <div class="w-full sm:w-auto mt-3 sm:mt-0">
                 <div class="w-56 relative text-slate-500">
-                    <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
-                    <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
+                    <input type="date" id="tgl" class="form-control box w-56 date-picker" placeholder="Search...">
                 </div>
             </div>
-        </div> -->
+            <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-auto">
+                <div class="w-56 relative text-slate-500">
+                    <input type="text" id="cari" class="form-control w-56 box pr-10" placeholder="Search...">
+                    <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i> 
+                </div>
+            </div>
+        </form>
         <!-- BEGIN: Data List -->
         <div class="intro-y col-span-12 overflow-auto lg:overflow-visible ">
             <table class="table table-report -mt-2 ">
@@ -91,7 +96,7 @@
                             @endforeach
                             <td class="w-40 text-center">
                                 <div class="flex items-center justify-center {{ $dt->sv == 1 ? 'text-success' : 'text-danger' }}">
-                                    <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> {{ $dt->sv==1 ? 'Terverifikasi' : ($dt->sv==2 ? 'T' : 'Y') }}
+                                    <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> {{ $dt->sv==1 ? 'Terverifikasi' : ($dt->sv==2 ? 'Ditolak' : 'Menunggu Verifikasi') }}
                                 </div>
                             </td>
                         </tr>
@@ -101,53 +106,7 @@
         </div>
         <!-- END: Data List -->
         <!-- BEGIN: Pagination -->
-        <!-- <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
-            <nav class="w-full sm:w-auto sm:mr-auto">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#">
-                            <i class="w-4 h-4" data-lucide="chevrons-left"></i>
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">
-                            <i class="w-4 h-4" data-lucide="chevron-left"></i>
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">...</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">...</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">
-                            <i class="w-4 h-4" data-lucide="chevron-right"></i>
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">
-                            <i class="w-4 h-4" data-lucide="chevrons-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <select class="w-20 form-select box mt-3 sm:mt-0">
-                <option>10</option>
-                <option>25</option>
-                <option>35</option>
-                <option>50</option>
-            </select>
-        </div> -->
+        {{$data->onEachSide(1)->links()}}
         <!-- END: Pagination -->
     </div>
 
@@ -155,4 +114,9 @@
 
 @section('script')
     <script src="{{ mix('dist/js/ckeditor-classic.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            console.log("HALO")
+        });
+    </script>
 @endsection
