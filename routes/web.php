@@ -6,6 +6,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\DarkModeController;
 use App\Http\Controllers\ColorSchemeController;
 use App\Http\Controllers\TransferController;
+use App\Http\Controllers\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +24,6 @@ Route::get('color-scheme-switcher/{color_scheme}', [ColorSchemeController::class
 
 Route::get('/', [TransferController::class, 'index'])->name('dashboard');
 Route::post('store-file', [TransferController::class, 'store'])->name('file.store');
+Route::post('upload',  [UploadController::class, 'store'])->name('upload.store');
 // Route::get('crud-data-list-page', [PageController::class, 'crudDataList'])->name('crud-data-list');
 // Route::get('crud-form-page', [PageController::class, 'crudForm'])->name('crud-form');

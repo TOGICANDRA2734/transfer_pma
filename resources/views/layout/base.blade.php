@@ -7,7 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
+    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
     @yield('head')
 
     <!-- BEGIN: CSS Assets-->

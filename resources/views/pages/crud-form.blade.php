@@ -34,6 +34,7 @@
                 <div class="mt-3">
                     <label for="file_pma">File PMA (Rar & Zip)</label>
                     <div class="mt-2">
+                        <!-- <input type="file" id="file_pma" /> -->
                         <input name="file_pma" id="file_pma" type="file" class="form-control @error('file_pma') border-danger @enderror}}" /> 
                         @error('file_pma')
                             <div class="text-danger mt-2">{{$message}}</div>
@@ -82,21 +83,27 @@
                                 {{$key + 1}}
                             </td>
                             @foreach($dt as $keys => $d)
-                                @if($keys != 'sv')
+                                @if($keys != 'sv' and $keys!='file')
                                     @if($keys == 'tgl')
                                         <td class="text-center font-medium whitespace-nowrap">
                                             {{date('d-m-Y', strtotime($d))}}
                                         </td>
                                     @else
                                         <td class="text-center font-medium whitespace-nowrap">
-                                            {{$d}}
+                                            {{$d}} 
                                         </td>
                                     @endif
                                 @endif
                             @endforeach
                             <td class="w-40 text-center">
                                 <div class="flex items-center justify-center {{ $dt->sv == 1 ? 'text-success' : 'text-danger' }}">
-                                    <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> {{ $dt->sv==1 ? 'Terverifikasi' : ($dt->sv==2 ? 'Ditolak' : 'Menunggu Verifikasi') }}
+                                    @if($dt->sv!=1)
+                                        <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> {{$dt->sv==2 ? 'Ditolak' : 'Menunggu Verifikasi' }} 
+                                    @else
+                                        <a href="{{Storage::url('file/'.$dt->file)}}" class="flex justify-center items-center">
+                                            <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Terverifikasi 
+                                        </a>
+                                    @endif
                                 </div>
                             </td>
                         </tr>
@@ -106,7 +113,7 @@
         </div>
         <!-- END: Data List -->
         <!-- BEGIN: Pagination -->
-        {{$data->onEachSide(1)->links()}}
+        {{$data->links()}}
         <!-- END: Pagination -->
     </div>
 
@@ -114,9 +121,16 @@
 
 @section('script')
     <script src="{{ mix('dist/js/ckeditor-classic.js') }}"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            console.log("HALO")
-        });
-    </script>
+    <!-- <script>
+        const inputElement = document.querySelector('input[id="file_pma"]');
+        const pond = FilePond.create(inputElement);
+        pond.setOptions({
+            server: {
+                url: '/upload',
+                headers: {
+                    'X-CSRF-TOKEN': '{{csrf_token()}}'
+                }
+            }
+        })
+    </script> -->
 @endsection
